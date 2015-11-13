@@ -21,4 +21,4 @@ Para isso deve seguir alguns passos:
 IMPORTANTE faça uma cópia de todos os arquivos padrão
 8. Altere os arquivos /etc/rc.local /etc/squid3 /etc/sarg
 9. Instale os pacotes no click-5.1
-10. # pip install click
+# pip install click
