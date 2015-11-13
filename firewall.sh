@@ -18,6 +18,9 @@ iptables -t mangle -F
 
 #**************As demais regras que forem sendo criadas pelo administrador da rede irão aqui.
 
+#marcador#
+
+
 #Regra de bloqueio de IP
 #iptables -A INPUT -s (IP que deseja bloquear) -j DROP
 
