@@ -28,3 +28,5 @@ IMPORTANTE faça uma cópia de todos os arquivos padrão
 8. Altere os arquivos /etc/rc.local /etc/squid3 /etc/sarg /etc/default/isc-dhcp-server
 9. Instale os pacotes no click-5.1
 # pip install click
+10. Execute o gerenciadorDeRede.py
+#python gerenciadorDeRede.py main
