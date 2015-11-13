@@ -16,8 +16,24 @@ iptables -t nat -F
 #Na tabela mangle (alterações de pacotes especifícos
 iptables -t mangle -F
 
-#As demais regras que forem sendo criadas pelo administrador da rede irão aqui.
+#**************As demais regras que forem sendo criadas pelo administrador da rede irão aqui.
 
+#Regra de bloqueio de IP
+#iptables -A INPUT -s (IP que deseja bloquear) -j DROP
+
+#Regra para aceitar conexão
+#iptables -A INPUT -s (IP que deseja bloquear) -j ACCEPT
+
+#Regra pra permitir um usuário específio aceitar o facebook
+#iptables -A FORWARD -i eth1 -s (Ip da estação de trabalho) -m string --algo bm --string "facebook.com" -j ACCEPT
+
+#Regra para criar um log de acesso ao facebook
+#iptables -A FORWARD -i eth1 -m string --algo bm --string "facebook.com" -j LOG --log-prefix " acesso facebook: " --log-level alert
+
+#Regra de bloqueio aos demais integrantes da rede ao facebook
+#iptables -A FORWARD -i eth1 -m string --algo bm --string "facebook.com" -j DROP  #BLOQUEIA GERAL
+
+#************************#
 #Adiciona os modulos no kernel;
 modprobe ip_tables
 modprobe iptable_nat
