@@ -1,10 +1,11 @@
+# -*- coding: cp1252 -*-
 import click
 import sys
 import subprocess
 
 def exit():
   """SAIR DO SISTEMA"""
-  print "Obrigado por utilizar o gerenciador do redes."
+  print "Obrigado por utilizar o Gerenciador de Redes. \nFique tranquilo tudo está salvo."
   return sys.exit(0)
 
 
@@ -24,7 +25,7 @@ def add_block():
     elif op == "2":
       return add_block_ip()
     else:
-      print "OPCAO INVALIDA"
+      print "OPÇÃO INVALIDA"
 
 
 def add_block_url():
@@ -65,9 +66,9 @@ def main():
 
   def print_menu():
     click.clear()
-    print "MENU DE OPCOES"
+    print "MENU DE OPÇÕES DO GERENCIADOR DE REDES\n"
     for opt, func in sorted(options.iteritems()):
-      print "%s\t - \t%s" % (opt, func.__doc__)
+      print "%s\t - \t%s \n" % (opt, func.__doc__)
 
   while True:
     print_menu()
@@ -75,7 +76,7 @@ def main():
     if opt in options:
       options[opt]()
     else:
-      click.pause( click.style("Opcao invalida. Aperte ENTER para continuar.\n", fg='red'))
+      click.pause( click.style("Opção invalida. Aperte ENTER para continuar.\n", fg='red'))
 
 
 if __name__ == "__main__":
