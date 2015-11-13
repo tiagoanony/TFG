@@ -39,6 +39,15 @@ def add_block_ip():
   ip = raw_input("Digite o endereco de IP que deseja bloquear: ")
   comando = "iptables -A INPUT -s %s -j DROP" % ip
   print subprocess.check_output(comando, shell=True)
+  
+  
+  #salvando execucao
+  with open("/home/.firewall/firewall.sh", "r+") as arq:
+      conteudo = arq.read()
+      conteudo.replace("#marcador#", "#marcador#\n"+comando+"\n")
+      arq.seek(0)
+      arq.write(conteudo)
+
   print "Comando executado."
   click.pause("Pressione ENTER para continuar")
 
