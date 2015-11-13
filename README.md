@@ -29,4 +29,4 @@ IMPORTANTE faça uma cópia de todos os arquivos padrão
 9. Instale os pacotes no click-5.1
 # pip install click
 10. Execute o gerenciadorDeRede.py
-#python gerenciadorDeRede.py main
+#python gerenciadorDeRede.py
