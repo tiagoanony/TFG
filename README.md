@@ -1,10 +1,16 @@
 # TFG
 Raspberry Pi
 
+O Que necessito para ter o servidor funcional.
+1. Raspberry Pi 2 Model B;
+2. Placa de rede ethernet usb;
+3. Imagem do Raspbian Whezzy, obtida em:
+https://downloads.raspberrypi.org/raspbian/images/raspbian-2015-05-07/2015-05-05-raspbian-wheezy.zip
+
 Neste repositório você irá encontrar os arquivos de configuração necessários para a configuração de um servidor de firewall e proxy.
 Para isso deve seguir alguns passos:
 
-1. Instale o Raspbian Whezzy no seu Raspbery 2 Modelo B (Vale lembrar que o abaixo, foi testado somente nesse cenário)
+1. Instale o Raspbian Whezzy no seu Raspbery 2 Modelo B, já com a placa de rede USB conectada (Vale lembrar que o abaixo, foi testado somente nesse cenário)
 2. Abra o terminal como root
 3. Configure suas placas de rede, para eth0 receber o sinal da internet e eth1 distribuir para o switch
 3.1 Neste caso é configurado a rede 192.168.0.0/24 com o ip 192.168.0.100 na placa de rede eth1
