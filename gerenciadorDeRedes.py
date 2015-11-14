@@ -1,3 +1,7 @@
+433-057
+430-227
+567353
+
 # -*- coding: cp1252 -*-
 import click
 import sys
@@ -5,7 +9,7 @@ import subprocess
 
 def exit():
   """SAIR DO SISTEMA"""
-  print "Obrigado por utilizar o Gerenciador de Redes. \nFique tranquilo tudo est√° salvo."
+  print "Obrigado por utilizar o Gerenciador de Redes. \nFique tranquilo tudo est· salvo."
   return sys.exit(0)
 
 
@@ -17,7 +21,7 @@ def list_rules():
 
 
 def add_block():
-  """ADICIONAR REGRAS"""
+  """MENU ADICIONAR"""
   while True:
     op = raw_input("Digite 1 para bloqueio de URL ou 2 para bloqueio de IP: ")
     if op == "1":
@@ -25,13 +29,23 @@ def add_block():
     elif op == "2":
       return add_block_ip()
     else:
-      print "OP√á√ÉO INVALIDA"
+      print "OP«√O INVALIDA"
 
 
 def add_block_url():
   """ADICIONAR BLOQUEIO DE URL"""
   end = raw_input("Digite o endereco que deseja bloquear: ")
-  
+  comando = iptables -A FORWARD -i eth1 -m string --algo bm --string "% end" -j DROP
+  print subprocess.check_output(comando, shell=True)
+
+  with open("/root/.firewall/firewall.sh", "r+") as arq:
+      conteudo = arq.read()
+      conteudo.replace("#marcador#", "#marcador#\n"+comando+"\n")
+      arq.seek(0)
+      arq.write(conteudo)
+
+  print "Comando executado."
+  click.pause("Pressione ENTER para continuar")  
 
 
 def add_block_ip():
@@ -41,8 +55,7 @@ def add_block_ip():
   print subprocess.check_output(comando, shell=True)
   
   
-  #salvando execucao
-  with open("/home/.firewall/firewall.sh", "r+") as arq:
+  with open("/root/.firewall/firewall.sh", "r+") as arq:
       conteudo = arq.read()
       conteudo.replace("#marcador#", "#marcador#\n"+comando+"\n")
       arq.seek(0)
@@ -53,18 +66,51 @@ def add_block_ip():
 
 
 def remove_block():
-  """REMOVER REGRAS"""
-  pass
-
+  """ MENU REMOVER """
+  while True:
+    op = raw_input("Digite 5 para remover bloqueio de URL ou 6 para remover bloqueio de IP: ")
+    if op == "5":
+      return add_block_url()
+    elif op == "6":
+      return add_block_ip()
+    else:
+      print "OP«√O INVALIDA"
+ 
 
 def remove_block_url():
   """REMOVER BLOQUEIO DE URL"""
-  pass
+  end = raw_input("Digite o endereco que deseja remover o bloqueio: ")
+  comando = "iptables -A FORWARD -i eth1 -m string --algo bm --string %s -j DROP --delete" % end
+  print subprocess.check_output(comando, shell=True)
+
+  with open("/root/.firewall/firewall.sh", "r+") as arq:
+      conteudo = arq.read()
+      conteudo.replace(comando, "")
+      arq.seek(0)
+      arq.write(conteudo)
+
+  atualizascript = "./root/.firewall/firewall.sh"
+  print subprocess.checkoutput(comando, shell=True)
+  print "Comandos executados."
+  click.pause("Pressione ENTER para continuar")  
 
 
 def remove_block_ip():
   """REMOVER BLOQUEIO DE IP"""
-  pass
+  ip = raw_input("Digite o IP que deseja remover o bloqueio: ")
+  comando = "iptables -A INPUT -s %s -j DROP --delete" % ip
+  print subprocess.check_output(comando, shell=True)
+
+  with open("/root/.firewall/firewall.sh", "r+") as arq:
+      conteudo = arq.read()
+      conteudo.replace(comando, "")
+      arq.seek(0)
+      arq.write(conteudo)
+
+  atualizascript = "./root/.firewall/firewall.sh"
+  print subprocess.checkoutput(atualizascript, shell=True)
+  print "Comandos executados."
+  click.pause("Pressione ENTER para continuar")  
 
 
 @click.command()
@@ -75,7 +121,7 @@ def main():
 
   def print_menu():
     click.clear()
-    print "MENU DE OP√á√ïES DO GERENCIADOR DE REDES\n"
+    print "MENU DE OP«’ES DO GERENCIADOR DE REDES\n"
     for opt, func in sorted(options.iteritems()):
       print "%s\t - \t%s \n" % (opt, func.__doc__)
 
@@ -85,7 +131,7 @@ def main():
     if opt in options:
       options[opt]()
     else:
-      click.pause( click.style("Op√ß√£o invalida. Aperte ENTER para continuar.\n", fg='red'))
+      click.pause( click.style("OpÁ„o invalida. Aperte ENTER para continuar.\n", fg='red'))
 
 
 if __name__ == "__main__":
