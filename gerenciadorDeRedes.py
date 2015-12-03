@@ -77,16 +77,18 @@ def remove_block_url():
   """REMOVER BLOQUEIO DE URL"""
   end = raw_input("Digite o endereco que deseja remover o bloqueio: ")
   comando = "iptables -A FORWARD -i eth1 -m string --algo bm --string %s -j DROP --delete" % end
+  comandoatualiza = "iptables -A FORWARD -i eth1 -m string --algo bm --string %s -j DROP" % end
   print subprocess.check_output(comando, shell=True)
 
   with open("/root/.firewall/firewall.sh", "r+") as arq:
       conteudo = arq.read()
-      conteudo.replace(comando, "")
+      conteudo.replace(comandoatualiza, "")
       arq.seek(0)
       arq.write(conteudo)
 
   atualizascript = "./root/.firewall/firewall.sh"
   print subprocess.checkoutput(comando, shell=True)
+  print subprocess.checkoutput(atualizascript, shell=True)
   print "Comandos executados."
   click.pause("Pressione ENTER para continuar")  
 
