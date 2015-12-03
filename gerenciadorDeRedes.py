@@ -82,7 +82,7 @@ def remove_block_url():
 
   with open("/root/.firewall/firewall.sh", "r+") as arq:
       conteudo = arq.read()
-      conteudo.replace(comandoatualiza, "")
+      conteudo.remove(comandoatualiza)
       arq.seek(0)
       arq.write(conteudo)
 
