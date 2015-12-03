@@ -1,7 +1,3 @@
-433-057
-430-227
-567353
-
 # -*- coding: cp1252 -*-
 import click
 import sys
@@ -9,7 +5,7 @@ import subprocess
 
 def exit():
   """SAIR DO SISTEMA"""
-  print "Obrigado por utilizar o Gerenciador de Redes. \nFique tranquilo tudo est· salvo."
+  print "Obrigado por utilizar o Gerenciador de Redes. \nFique tranquilo tudo est√° salvo."
   return sys.exit(0)
 
 
@@ -29,13 +25,13 @@ def add_block():
     elif op == "2":
       return add_block_ip()
     else:
-      print "OP«√O INVALIDA"
+      print "OP√á√ÉO INVALIDA"
 
 
 def add_block_url():
   """ADICIONAR BLOQUEIO DE URL"""
   end = raw_input("Digite o endereco que deseja bloquear: ")
-  comando = iptables -A FORWARD -i eth1 -m string --algo bm --string "% end" -j DROP
+  comando = "iptables -A FORWARD -i eth1 -m string --algo bm --string % s -j DROP" % end
   print subprocess.check_output(comando, shell=True)
 
   with open("/root/.firewall/firewall.sh", "r+") as arq:
@@ -74,7 +70,7 @@ def remove_block():
     elif op == "6":
       return add_block_ip()
     else:
-      print "OP«√O INVALIDA"
+      print "OP√á√ÉO INVALIDA"
  
 
 def remove_block_url():
@@ -121,7 +117,7 @@ def main():
 
   def print_menu():
     click.clear()
-    print "MENU DE OP«’ES DO GERENCIADOR DE REDES\n"
+    print "MENU DE OP√á√ïES DO GERENCIADOR DE REDES\n"
     for opt, func in sorted(options.iteritems()):
       print "%s\t - \t%s \n" % (opt, func.__doc__)
 
@@ -131,7 +127,7 @@ def main():
     if opt in options:
       options[opt]()
     else:
-      click.pause( click.style("OpÁ„o invalida. Aperte ENTER para continuar.\n", fg='red'))
+      click.pause( click.style("Op√ß√£o invalida. Aperte ENTER para continuar.\n", fg='red'))
 
 
 if __name__ == "__main__":
